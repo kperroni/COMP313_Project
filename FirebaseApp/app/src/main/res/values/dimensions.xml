@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text dimensions and properties -->
+        <!-- Titles -->
+            <dimen name="titleSize">26sp</dimen>
+            <dimen name="titlePaddingTop">20dp</dimen>
+        <!-- End of Titles -->
+
+        <!-- Text -->
+
+
+        <!-- End of Text -->
+
+    <!-- End of Text dimensions and properties -->
+
+    <!-- EditText dimensions and properties -->
+        <dimen name="editTextWidth">200dp</dimen>
+    <!-- End of EditText dimensions and properties -->
+
+    <!-- TableLayout dimensions and properties -->
+        <dimen name="tableLayoutPaddingTop">50dp</dimen>
+    <!-- End of TableLayout dimensions and properties -->
+</resources>
