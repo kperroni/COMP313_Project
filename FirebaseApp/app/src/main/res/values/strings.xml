@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Firebase App</string>
+
+    <!-- String values for RegisterUserActivity -->
+    <string name="registerUserTitle">Registration Form</string>
+    <string name="registerUserFirstName">First Name</string>
+    <string name="registerUserLastName">Last Name</string>
+    <string name="registerUserAddress">Address</string>
+    <string name="registerUserPhoneNumber">Phone Number</string>
+    <string name="registerUserEmail">Email</string>
+    <string name="registerUserPassword">Password</string>
+    <string name="registerUserAllowPoliceCalls">Allow Police Calls</string>
+    <!-- End of String values for RegisterUserActivity -->
+
+    <!-- String values for MainActivity (Login) -->
+    <string name="mainLoginTitle">Welcome to Crimestalker!</string>
+    <string name="mainLoginEmail">Enter Email</string>
+    <string name="mainLoginPassword">Enter Password</string>
+    <string name="mainLoginEnter">Sign In</string>
+    <string name="mainLoginRegisterUser">Sign Up</string>
+    <!-- End of String values for MainActivity (Login) -->
+
+    <!-- String values for ReportCrimeActivity -->
+    <string name="labelTitle">Title</string>
+    <string name="labelDescription">Description</string>
+    <string name="labelType">Type</string>
+    <string name="labelComments">Comments</string>
+    <string name="ReportButton">Report</string>
+    <!--End of String values for ReportCrimeActivity -->
+
+    <!-- Misc items -->
+    <string name="miscSubmitButton">Submit</string>
+    <string name="title_activity_login">Sign in</string>
+    <!--End of Misc items -->
+</resources>

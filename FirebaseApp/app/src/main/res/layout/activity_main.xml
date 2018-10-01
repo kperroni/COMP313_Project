@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activities.MainActivity">
+
+    <TableRow android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txtViewMainLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainLoginTitle"
+            android:textSize="@dimen/titleSize"
+            android:textColor="@color/colorText"/>
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextMainLoginEmail"
+            android:layout_width="@dimen/editTextWidth"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:hint="@string/mainLoginEmail"
+            android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/editTextMainLoginPassword"
+            android:layout_width="@dimen/editTextWidth"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:hint="@string/mainLoginPassword"
+            android:inputType="textPassword" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnMainLoginEnter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainLoginEnter"
+            android:onClick="loginUser"/>
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnMainLoginRegisterUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launchRegisterUser"
+            android:text="@string/mainLoginRegisterUser" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/btnTestReportCrime"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:onClick="testActivity_Clicked"
+        android:text="Test Rerport Crime" />
+</TableLayout>
