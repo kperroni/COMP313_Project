@@ -1,10 +1,13 @@
 package com.example.t410.firebaseapp.Classes;
 
+import java.util.ArrayList;
+
 public class Crime {
 
     private String title;
     private String description;
     private String type;
+    private ArrayList<String> comments;
     private float latitude;
     private float longitude;
     private int witnesses;
@@ -22,6 +25,16 @@ public class Crime {
     public Crime(String title, String description, int urgency) {
         this.title = title;
         this.description = description;
+        comments = new ArrayList<>();
+    }
+    public void addComments(String comment)
+    {
+        comments.add(comment);
+    }
+
+    public String[] getComments()
+    {
+        return (String[])comments.toArray();
     }
 
     public String getTitle() {

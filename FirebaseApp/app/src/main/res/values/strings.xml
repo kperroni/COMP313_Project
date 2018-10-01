@@ -20,6 +20,14 @@
     <string name="mainLoginRegisterUser">Sign Up</string>
     <!-- End of String values for MainActivity (Login) -->
 
+    <!-- String values for ReportCrimeActivity -->
+    <string name="labelTitle">Title</string>
+    <string name="labelDescription">Description</string>
+    <string name="labelType">Type</string>
+    <string name="labelComments">Comments</string>
+    <string name="ReportButton">Report</string>
+    <!--End of String values for ReportCrimeActivity -->
+
     <!-- Misc items -->
     <string name="miscSubmitButton">Submit</string>
     <string name="title_activity_login">Sign in</string>
