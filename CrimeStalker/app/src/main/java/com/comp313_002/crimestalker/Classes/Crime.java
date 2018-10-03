@@ -1,13 +1,14 @@
 package com.comp313_002.crimestalker.Classes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Crime {
 
     private String title;
     private String description;
     private String type;
-    private ArrayList<String> comments;
+    private List<String> comments = new ArrayList<>();
     private float latitude;
     private float longitude;
     private int witnesses;
@@ -25,16 +26,15 @@ public class Crime {
     public Crime(String title, String description, int urgency) {
         this.title = title;
         this.description = description;
-        comments = new ArrayList<>();
     }
     public void addComments(String comment)
     {
         comments.add(comment);
     }
 
-    public String[] getComments()
+    public List<String> getComments()
     {
-        return (String[])comments.toArray();
+        return comments;
     }
 
     public String getTitle() {
