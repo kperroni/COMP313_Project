@@ -25,10 +25,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
+
 
 public class ReportCrimeActivity extends AppCompatActivity implements OnMapReadyCallback {
     private LocationManager locationManager;
@@ -38,7 +41,7 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.INTERNET};
     private static final String MAP_BUNDLE_KEY = "MapViewBundleKey";
-
+    private FirebaseDatabase fireDB = FirebaseDatabase.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,21 +167,28 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
         EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
         EditText txtType = (EditText) findViewById(R.id.txtType);
         EditText txtComments = (EditText) findViewById(R.id.txtComments);
+
         Location currentLocation = getCurrentLocation();
         String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        // Get a reference to the database service
+        DatabaseReference database = fireDB.getReference("crimes");
+
         if(hasValidInput(txtTitle) && hasValidInput(txtType)){
             Crime crime = new Crime();
             crime.setTitle(txtTitle.getText().toString());
             crime.setDescription(txtDescription.getText().toString());
             crime.setType(txtType.getText().toString());
-            if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString()))
+            if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
                 crime.addComments(txtComments.getText().toString());
+            }
             crime.setLatitude((float)currentLocation.getLatitude());
             crime.setLongitude((float)currentLocation.getLongitude());
             crime.setTimeStamp(date);
 
             Toast.makeText( this.getApplicationContext(),"Crime Reported",Toast.LENGTH_LONG ).show();
             clearInputFields();
+            database.child("CrimeReports").push().setValue(crime);
         }
         else{
             Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
@@ -192,7 +202,7 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
         ((EditText) findViewById(R.id.txtTitle)).getText().clear();
         ((EditText) findViewById(R.id.txtDescription)).getText().clear();
         ((EditText) findViewById(R.id.txtType)).getText().clear();
-        ((EditText) findViewById(R.id.txtComments)).getText();
+        ((EditText) findViewById(R.id.txtComments)).getText().clear();
     }
 
     @Override
