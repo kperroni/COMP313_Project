@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/id_dynamic"
+        android:id="@+id/listViewCrime"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

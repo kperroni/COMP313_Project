@@ -30,6 +30,7 @@
             android:name=".Activities.RegisterUserActivity"
             android:windowSoftInputMode="adjustResize" android:label="@string/app_CreateAccount"></activity>
         <activity android:name=".Activities.ReportCrimeActivity" android:launchMode="singleTop" android:label="@string/app_ReportCrime"></activity>
+    <activity android:name=".Activities.ReadCrime"></activity>
     </application>
 
 </manifest>

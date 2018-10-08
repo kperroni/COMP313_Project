@@ -133,7 +133,17 @@ public class MainActivity extends AppCompatActivity {
     //To Test ReportCrimeActivity
     public void testActivity_Clicked(View view)
     {
-        Intent intent = new Intent(this, ReportCrimeActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, ReportCrimeActivity.class);
+            startActivity(intent);
+
+
+
     }
+    public void testReadCrime_Clicked(View view)
+    {
+            Intent intent = new Intent(this, ReadCrime.class);
+            startActivity(intent);
+
+    }
+
 }

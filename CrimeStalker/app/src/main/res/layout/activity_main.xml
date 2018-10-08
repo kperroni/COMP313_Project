@@ -73,4 +73,11 @@
         android:onClick="testActivity_Clicked"
         android:text="Test Rerport Crime" />
 
+    <Button
+        android:id="@+id/btnTesReadCrime"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:onClick="testReadCrime_Clicked"
+        android:text="Check Crimes" />
+
 </TableLayout>
