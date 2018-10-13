@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,20 +27,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MainActivity extends AppCompatActivity {
     private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.INTERNET};
     public static View.OnClickListener myOnClickListener;
+
+    private TwitterLoginButton twitterButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setUpTwitterButton();
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) == PackageManager.PERMISSION_DENIED ||
-                    ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) == PackageManager.PERMISSION_DENIED ||
-                    ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) == PackageManager.PERMISSION_DENIED) {
-                this.requestPermissions( permissions, 1); }
+                ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) == PackageManager.PERMISSION_DENIED ||
+                ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) == PackageManager.PERMISSION_DENIED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                this.requestPermissions(permissions, 1);
+            }
+        }
         myOnClickListener = new MyOnClickListener(this);
     }
 
@@ -86,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot crimes : dataSnapshot.getChildren()) {
                     Crime aCrime = crimes.getValue(Crime.class);
-                    Log.d("My app", "Getting data: "+aCrime.getDescription());
+                    Log.d("My app", "Getting data: " + aCrime.getDescription());
                 }
                 // ...
             }
@@ -107,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             // user registered successfully
                             // adding profile here
                             Toast.makeText(MainActivity.this, "User registered", Toast.LENGTH_LONG);
@@ -115,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private static class MyOnClickListener implements View.OnClickListener {
 
         private final Context context;
@@ -130,20 +145,57 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     //To Test ReportCrimeActivity
-    public void testActivity_Clicked(View view)
-    {
-            Intent intent = new Intent(this, ReportCrimeActivity.class);
-            startActivity(intent);
-
+    public void testActivity_Clicked(View view) {
+        Intent intent = new Intent(this, ReportCrimeActivity.class);
+        startActivity(intent);
 
 
     }
-    public void testReadCrime_Clicked(View view)
-    {
-            Intent intent = new Intent(this, ReadCrime.class);
-            startActivity(intent);
+
+    public void testReadCrime_Clicked(View view) {
+        Intent intent = new Intent(this, ReadCrime.class);
+        startActivity(intent);
 
     }
 
+    private void setUpTwitterButton() {
+        twitterButton = (TwitterLoginButton) findViewById(R.id.twitter_button);
+        twitterButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.app_name),
+                        Toast.LENGTH_SHORT).show();
+
+                setUpViewsForTweetComposer();
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.app_name),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        twitterButton.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    private void setUpViewsForTweetComposer() {
+        Intent readCrimeIntent = new Intent(MainActivity.this, ReadCrime.class);
+        startActivity(readCrimeIntent);
+    }
 }
