@@ -18,7 +18,7 @@
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBxjixvbvxkJPLvfKH9JwEhS3m_Trhg4ag"/>
         <uses-library android:name="com.google.android.maps" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".AndroidTwitterExampleInit"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +31,10 @@
             android:windowSoftInputMode="adjustResize" android:label="@string/app_CreateAccount"></activity>
         <activity android:name=".Activities.ReportCrimeActivity" android:launchMode="singleTop" android:label="@string/app_ReportCrime"></activity>
     <activity android:name=".Activities.ReadCrime"></activity>
+        <activity android:name=".Activities.MainActivity"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2f160620708ff1ba8a44940d7808bec5d334c9b6" />
     </application>
 
 </manifest>

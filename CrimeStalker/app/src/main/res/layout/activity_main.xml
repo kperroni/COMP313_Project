@@ -73,6 +73,7 @@
         android:onClick="testActivity_Clicked"
         android:text="Test Rerport Crime" />
 
+
     <Button
         android:id="@+id/btnTesReadCrime"
         android:layout_width="182dp"
@@ -80,4 +81,11 @@
         android:onClick="testReadCrime_Clicked"
         android:text="Check Crimes" />
 
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/twitter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:clickable="true" />
 </TableLayout>

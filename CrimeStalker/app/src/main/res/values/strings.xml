@@ -39,4 +39,7 @@
     <string name="miscSubmitButton">Submit</string>
     <string name="title_activity_login">Sign in</string>
     <!--End of Misc items -->
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="share_to">Share report to: </string>
 </resources>
