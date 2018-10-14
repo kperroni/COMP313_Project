@@ -33,6 +33,9 @@
     <string name="ReportButton">Report</string>
     <!--End of String values for ReportCrimeActivity -->
 
+    <!-- String values for HomeActivity drawer menu -->
+    <string name="homeDrawerViewMap">Crime Map</string>
+    <!-- End of String values for HomeActivity drawer menu -->
 
     <!-- Misc items -->
     <string name="miscSubmitButton">Submit</string>
@@ -45,4 +48,5 @@
     <string name="report_desc">Description:</string>
     <string name="report_loc_lat">Latitude:</string>
     <string name="report_loc_long">Longitude:</string>
+    <string name="title_activity_crime_map">Map</string>
 </resources>
