@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Crime {
-
+    private String userId;
     private String title;
     private String description;
     private String type;
@@ -31,7 +31,13 @@ public class Crime {
     {
         comments.add(comment);
     }
+    public String getUserId() {
+        return userId;
+    }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
     public List<String> getComments()
     {
         return comments;

@@ -49,4 +49,5 @@
     <string name="report_loc_lat">Latitude:</string>
     <string name="report_loc_long">Longitude:</string>
     <string name="title_activity_crime_map">Map</string>
+    <string name="homeDrawerReportCrime">Report Crime</string>
 </resources>

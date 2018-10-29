@@ -5,5 +5,9 @@
             android:id="@+id/drawerMapItem"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="@string/homeDrawerViewMap" />
+        <item
+            android:id="@+id/drawerReportCrime"
+            android:icon="@drawable/ic_police"
+            android:title="@string/homeDrawerReportCrime" />
     </group>
 </menu>

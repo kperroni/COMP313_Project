@@ -48,6 +48,10 @@ public class HomeActivity extends AppCompatActivity {
                                 startActivity(new Intent(HomeActivity.this, CrimeMapActivity.class));
                                 break;
                             }
+                            case R.id.drawerReportCrime:{
+                                startActivity(new Intent(HomeActivity.this, ReportCrimeActivity.class));
+                                break;
+                            }
                         }
 
                         // Add code here to update the UI based on the item selected
