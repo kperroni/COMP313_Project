@@ -63,12 +63,6 @@
             android:onClick="launchRegisterUser"
             android:text="@string/mainLoginRegisterUser" />
 
-        <Button
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="test"
-            android:text="Button" />
     </TableRow>
 
 

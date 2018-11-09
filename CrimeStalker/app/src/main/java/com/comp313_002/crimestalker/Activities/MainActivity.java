@@ -191,10 +191,4 @@ public class MainActivity extends AppCompatActivity {
         Intent readCrimeIntent = new Intent(MainActivity.this, ReadCrime.class);
         startActivity(readCrimeIntent);
     }
-
-    public void test(View view)
-    {
-        Intent intent = new Intent(getApplicationContext(), CrimeHistoryActivity.class);
-        startActivity(intent);
-    }
 }

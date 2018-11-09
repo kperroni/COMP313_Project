@@ -9,5 +9,9 @@
             android:id="@+id/drawerReportCrime"
             android:icon="@drawable/ic_police"
             android:title="@string/homeDrawerReportCrime" />
+        <item
+            android:id="@+id/drawerCrimeHistory"
+            android:icon="@drawable/ic_police"
+            android:title="@string/homeCrimeHistory" />
     </group>
 </menu>
