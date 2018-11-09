@@ -77,4 +77,8 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(HomeActivity.this, MainActivity.class));
     }
+
+    public void test(View view){
+        startActivity(new Intent(getApplicationContext(), CrimeHistoryActivity.class));
+    }
 }
