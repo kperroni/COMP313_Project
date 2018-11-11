@@ -15,7 +15,8 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title: " />
+            android:text="Title: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -40,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Description: " />
+            android:text="Description: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewDesc"
@@ -63,7 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Latitude: " />
+            android:text="Latitude: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewLatitude"
@@ -84,7 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Longitude: " />
+            android:text="Longitude: "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewLongitude"
@@ -102,10 +106,11 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="81dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:singleLine="true"
             android:text="Address: "
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -113,7 +118,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Address" />
+            android:singleLine="false"
+            android:text="Address"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
