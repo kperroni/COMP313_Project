@@ -69,7 +69,7 @@ public class ReadCrime extends AppCompatActivity {
                     crime = crimes.getValue(Crime.class);
                     crime.setKey(crimes.getKey()); //set key to pass as an internal parameter
                     try {
-                        address = geocoder.getFromLocation(crime.getLatitude(), crime.getLatitude(), 1);
+                        address = geocoder.getFromLocation(crime.getLatitude(), crime.getLongitude(), 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
