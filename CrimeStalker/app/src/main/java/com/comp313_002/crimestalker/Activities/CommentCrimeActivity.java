@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.comp313_002.crimestalker.Classes.Crime;
 import com.comp313_002.crimestalker.R;
@@ -96,7 +97,13 @@ public class CommentCrimeActivity extends AppCompatActivity {
 
                                     if (crime.getComments().get(i).toString().equals(valueInitial)){
                                         String internal= String.valueOf(i);
-                                        myRef2.child(key).child("comments").child(internal).removeValue();
+                                        if (i>0) {
+                                            myRef2.child(key).child("comments").child(internal).removeValue();
+                                        }
+                                        else {
+                                            Toast.makeText(CommentCrimeActivity.this, "This comment cannot be deleted, try anoter!", Toast.LENGTH_LONG).show();
+                                        }
+
 
                                     }
                                 }
@@ -146,6 +153,9 @@ public class CommentCrimeActivity extends AppCompatActivity {
                     if (max < i ){
                         max = i;
                     }
+                    if (max ==0){
+                        max ++;
+                    }
 
 
                 }
@@ -156,7 +166,7 @@ public class CommentCrimeActivity extends AppCompatActivity {
                 continue;
             }
         }
-        return max + 1;
+        return max ;
     }
 
 
