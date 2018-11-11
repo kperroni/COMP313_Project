@@ -22,4 +22,5 @@
     <!-- TableLayout dimensions and properties -->
     <dimen name="tableLayoutPaddingTop">50dp</dimen>
     <!-- End of TableLayout dimensions and properties -->
+    <dimen name="maxium_height">48dp</dimen>
 </resources>

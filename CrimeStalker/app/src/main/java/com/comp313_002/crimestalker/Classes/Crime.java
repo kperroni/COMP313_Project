@@ -8,7 +8,7 @@ public class Crime {
     private String title;
     private String description;
     private String type;
-    private List<String> comments = new ArrayList<>();
+    private ArrayList<String> comments = new ArrayList<>();
     private float latitude;
     private float longitude;
     private int witnesses;
@@ -16,6 +16,9 @@ public class Crime {
     private String timeStamp;
     private String photoUrl;
     private boolean twitterShared;
+    private String key;
+    private String address;
+
 
     // Default constructor
     public Crime() {
@@ -32,7 +35,7 @@ public class Crime {
         comments.add(comment);
     }
 
-    public List<String> getComments()
+    public ArrayList<String> getComments()
     {
         return comments;
     }
@@ -115,6 +118,22 @@ public class Crime {
 
     public void setTwitterShared(boolean twitterShared) {
         this.twitterShared = twitterShared;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String keyfirebase) {
+        this.key = keyfirebase;
+
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }
