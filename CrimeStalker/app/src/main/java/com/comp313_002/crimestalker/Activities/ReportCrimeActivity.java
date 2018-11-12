@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,11 +43,13 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
             Manifest.permission.INTERNET};
     private static final String MAP_BUNDLE_KEY = "MapViewBundleKey";
     private FirebaseDatabase fireDB = FirebaseDatabase.getInstance();
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_crime);
         verifyPermission();
+        userId = FirebaseAuth.getInstance().getUid();
         Bundle mapBundle = null;
         if (savedInstanceState != null) {
             mapBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY);
@@ -162,7 +165,6 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
 
     public void btnReportCrime_clicked(View view)
     {
-        //TODO Push Reports to database
         EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
         EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
         EditText txtType = (EditText) findViewById(R.id.txtType);
@@ -177,6 +179,7 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
         if(hasValidInput(txtTitle) && hasValidInput(txtType)){
             Crime crime = new Crime();
             crime.setTitle(txtTitle.getText().toString());
+            crime.setUserId(userId);
             crime.setDescription(txtDescription.getText().toString());
             crime.setType(txtType.getText().toString());
             if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){

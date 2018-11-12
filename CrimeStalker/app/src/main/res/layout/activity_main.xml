@@ -62,14 +62,8 @@
             android:layout_height="wrap_content"
             android:onClick="launchRegisterUser"
             android:text="@string/mainLoginRegisterUser" />
-    </TableRow>
 
-    <Button
-        android:id="@+id/btnTestReportCrime"
-        android:layout_width="182dp"
-        android:layout_height="wrap_content"
-        android:onClick="testActivity_Clicked"
-        android:text="Test Rerport Crime" />
+    </TableRow>
 
 
     <Button

@@ -45,6 +45,8 @@
         <activity
             android:name=".Activities.CrimeMapActivity"
             android:label="@string/title_activity_crime_map"></activity>
+        <activity android:name=".Activities.CrimeHistoryActivity"
+            android:label="Crime History"/>
     </application>
 
 </manifest>

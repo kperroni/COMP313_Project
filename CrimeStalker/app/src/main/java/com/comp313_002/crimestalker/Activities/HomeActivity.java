@@ -48,6 +48,14 @@ public class HomeActivity extends AppCompatActivity {
                                 startActivity(new Intent(HomeActivity.this, CrimeMapActivity.class));
                                 break;
                             }
+                            case R.id.drawerReportCrime:{
+                                startActivity(new Intent(HomeActivity.this, ReportCrimeActivity.class));
+                                break;
+                            }
+                            case R.id.drawerCrimeHistory:{
+                                startActivity(new Intent(HomeActivity.this, CrimeHistoryActivity.class));
+                                break;
+                            }
                         }
 
                         // Add code here to update the UI based on the item selected
@@ -72,5 +80,9 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(HomeActivity.this, "Logging out", Toast.LENGTH_LONG).show();
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(HomeActivity.this, MainActivity.class));
+    }
+
+    public void test(View view){
+        startActivity(new Intent(getApplicationContext(), CrimeHistoryActivity.class));
     }
 }
