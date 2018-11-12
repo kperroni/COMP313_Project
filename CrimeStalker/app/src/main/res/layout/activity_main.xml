@@ -29,7 +29,6 @@
                 android:id="@+id/editTextMainLoginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@android:drawable/ic_dialog_email"
                 android:hint="@string/mainLoginEmail"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
@@ -41,7 +40,6 @@
             android:id="@+id/editTextMainLoginPassword"
             android:layout_width="@dimen/editTextWidth"
             android:layout_height="wrap_content"
-            android:drawableStart="@android:drawable/ic_lock_idle_lock"
             android:hint="@string/mainLoginPassword"
             android:inputType="textPassword" />
     </TableRow>

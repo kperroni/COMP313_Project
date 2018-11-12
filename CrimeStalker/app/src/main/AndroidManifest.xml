@@ -23,7 +23,7 @@
 
         <activity
             android:name=".AndroidTwitterExampleInit"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +40,11 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="2f160620708ff1ba8a44940d7808bec5d334c9b6" />
+
+        <activity android:name=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.CrimeMapActivity"
+            android:label="@string/title_activity_crime_map"></activity>
     </application>
 
 </manifest>
