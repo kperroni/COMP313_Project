@@ -22,8 +22,8 @@
         <uses-library android:name="com.google.android.maps" />
 
         <activity
-            android:name=".Activities.MainActivity"
-            android:label="@string/app_name">
+            android:name=".AndroidTwitterExampleInit"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,14 +32,14 @@
         </activity>
         <activity
             android:name=".Activities.RegisterUserActivity"
-            android:label="@string/app_CreateAccount"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Activities.ReportCrimeActivity"
-            android:label="@string/app_ReportCrime"
-            android:launchMode="singleTop" />
-        <activity android:name=".Activities.ReadCrime" />
+            android:windowSoftInputMode="adjustResize" android:label="@string/app_CreateAccount"></activity>
+        <activity android:name=".Activities.ReportCrimeActivity" android:launchMode="singleTop" android:label="@string/app_ReportCrime"></activity>
+    <activity android:name=".Activities.ReadCrime"></activity>
+        <activity android:name=".Activities.MainActivity"/>
         <activity android:name=".Activities.CommentCrimeActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2f160620708ff1ba8a44940d7808bec5d334c9b6" />
     </application>
 
 </manifest>
