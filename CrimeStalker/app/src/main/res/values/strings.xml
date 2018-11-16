@@ -1,6 +1,54 @@
 <resources>
-    <string name="app_name">Crime Stalker</string>
 
+    <!-- Activity Labels -->
+    <string name="app_name">Crime Stalker</string>
+    <string name="app_ReportCrime">Report Crime</string>
+    <string name="app_CreateAccount">Create Account</string>
+    <!--End of Activity Labels -->
+
+    <!-- String values for RegisterUserActivity -->
+    <string name="registerUserTitle">Registration Form</string>
+    <string name="registerUserFirstName">First Name</string>
+    <string name="registerUserLastName">Last Name</string>
+    <string name="registerUserAddress">Address</string>
+    <string name="registerUserPhoneNumber">Phone Number</string>
+    <string name="registerUserEmail">Email</string>
+    <string name="registerUserPassword">Password</string>
+    <string name="registerUserAllowPoliceCalls">Allow Police Calls</string>
+    <!-- End of String values for RegisterUserActivity -->
+
+    <!-- String values for MainActivity (Login) -->
+    <string name="mainLoginTitle">Welcome to Crimestalker!</string>
+    <string name="mainLoginEmail">Enter Email</string>
+    <string name="mainLoginPassword">Enter Password</string>
+    <string name="mainLoginEnter">Sign In</string>
+    <string name="mainLoginRegisterUser">Sign Up</string>
+    <!-- End of String values for MainActivity (Login) -->
+
+    <!-- String values for ReportCrimeActivity -->
+    <string name="labelTitle">Title</string>
+    <string name="labelDescription">Description</string>
+    <string name="labelType">Type</string>
+    <string name="labelComments">Comments</string>
+    <string name="ReportButton">Report</string>
+    <!--End of String values for ReportCrimeActivity -->
+
+    <!-- String values for HomeActivity drawer menu -->
+    <string name="homeDrawerViewMap">Crime Map</string>
+    <!-- End of String values for HomeActivity drawer menu -->
+
+    <!-- Misc items -->
+    <string name="miscSubmitButton">Submit</string>
+    <string name="title_activity_login">Sign in</string>
+    <!--End of Misc items -->
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="share_to">Share report to: </string>
+    <string name="report_title">Report:</string>
+    <string name="report_desc">Description:</string>
+    <string name="report_loc_lat">Latitude:</string>
+    <string name="report_loc_long">Longitude:</string>
+    <string name="title_activity_crime_map">Map</string>
+    <string name="homeDrawerReportCrime">Report Crime</string>
+    <string name="homeCrimeHistory">Crime History</string>
 </resources>
