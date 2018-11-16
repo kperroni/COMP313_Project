@@ -54,18 +54,6 @@ public class CrimeList extends ArrayAdapter<Crime> {
         textLongitude.setText(reportLocLong);
         textkey.setText(crime.getKey());
         address.setText(crime.getAddress());
-        llCrimeReportItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TweetComposer.Builder builder = new TweetComposer.Builder(context).text(
-                        context.getString(R.string.report_title) + " " + reportTitle + " " +
-                                context.getString(R.string.report_desc) + " " + reportDescription + " " +
-                                context.getString(R.string.report_loc_lat) + " " + reportLocLat + " " +
-                                context.getString(R.string.report_loc_long) + " " + reportLocLong
-                );
-                builder.show();
-            }
-        });
 
         return listViewItem;
     }

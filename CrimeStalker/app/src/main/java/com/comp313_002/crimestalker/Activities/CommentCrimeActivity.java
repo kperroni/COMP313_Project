@@ -1,5 +1,6 @@
 package com.comp313_002.crimestalker.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 
 import java.util.ArrayList;
@@ -36,11 +38,13 @@ public class CommentCrimeActivity extends AppCompatActivity {
     Crime crime;
     int maxValue = 0;
     String valueInitial;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_crime);
-
+        context = this;
         listViewCrime = (ListView)findViewById(R.id.listComments);
         final TextView title = (TextView) findViewById(R.id.textTitle);
         final TextView desc = (TextView) findViewById(R.id.textDesc);
@@ -48,6 +52,7 @@ public class CommentCrimeActivity extends AppCompatActivity {
         //oldComment.setVisibility(View.INVISIBLE);
         final Button btnBack = (Button) findViewById(R.id.buttonBack);
         final Button btnSave = (Button) findViewById(R.id.buttonSave);
+        final Button btnPost = (Button) findViewById(R.id.buttonPost);
         final EditText comment = (EditText) findViewById(R.id.editText);
 
         //crimeList = new ArrayList<>();
@@ -139,6 +144,19 @@ public class CommentCrimeActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TweetComposer.Builder builder = new TweetComposer.Builder(context).text(
+                        context.getString(R.string.report_title) + " " + crime.getTitle() + " " +
+                                context.getString(R.string.report_desc) + " " + crime.getDescription() + " " +
+                                context.getString(R.string.report_loc_lat) + " " + crime.getLatitude() + " " +
+                                context.getString(R.string.report_loc_long) + " " + crime.getLongitude()
+                );
+                builder.show();
             }
         });
     }

@@ -97,19 +97,28 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="62dp"
+        android:weightSum="3.0"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonBack"
-            android:layout_width="155dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Back" />
 
         <Button
             android:id="@+id/buttonSave"
-            android:layout_width="225dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Save" />
+        <Button
+            android:id="@+id/buttonPost"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Post" />
     </LinearLayout>
 
     <LinearLayout
