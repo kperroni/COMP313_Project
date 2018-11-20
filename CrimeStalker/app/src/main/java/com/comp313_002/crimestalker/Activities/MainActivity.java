@@ -56,79 +56,82 @@ public class MainActivity extends AppCompatActivity {
         myOnClickListener = new MyOnClickListener(this);
     }
 
+    /*
+    @Author: Kenny Perroni
+    This method launches the Activity to register users in the application
+    The method is called when the Sign up button is clicked in the Login view
+     */
     public void launchRegisterUser(View v) {
         startActivity(new Intent(this, RegisterUserActivity.class));
     }
 
+    /*
+    @Author: Kenny Perroni
+    This method handles the authentication of the user via Firebase authentication service.
+    The method is called when the Sign in button is clicked.
+    It takes as input the email address and password entered by the user in the Login view
+    The input is validated before it is processed. If it is valid, the firebase
+    service is called to authenticate the user. If the credentials are correct, the user
+    is taken to the application's home Activity, if it is not, the user will get a message that
+    the authentication failed.
+     */
     public void loginUser(View v) {
+        // Instantiating and linking email and password values from the view
         EditText email = findViewById(R.id.editTextMainLoginEmail);
         EditText password = findViewById(R.id.editTextMainLoginPassword);
-        FirebaseAuth firebase = FirebaseAuth.getInstance();
-        final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-        dialog.setMessage("Hold on...");
-        dialog.show();
-        firebase.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        dialog.dismiss();
-                        if (!task.isSuccessful()) {
-                            // there was an error
-                            Toast.makeText(MainActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
-
-                        } else {
-                            Toast.makeText(MainActivity.this, "Authentication successful!", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        // Calling function to validate email and password input
+        if(isLoginValidated(email.getText().toString(), password.getText().toString())){
+            // If the login input is correct, the firebase authentication service is instantiated
+            FirebaseAuth firebase = FirebaseAuth.getInstance();
+            // A dialog object is created to show the progress of the login process
+            final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+            // Setting a message to the progress dialog
+            dialog.setMessage("Hold on...");
+            // Showing the progress dialog
+            dialog.show();
+            // Calling firebase method to authenticate user using email address and password
+            firebase.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                        // This callback method is executed when the authentication process finishes
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            // The dialog box is dismissed
+                            dialog.dismiss();
+                            // The task variable in the parameter is evaluated to check whether it was successful or not
+                            if (!task.isSuccessful()) {
+                                // If it was not successful, the credentials entered were not correct
+                                // A message is shown to the user
+                                Toast.makeText(MainActivity.this, "Authentication failed! \n Wrong username or password", Toast.LENGTH_LONG).show();
+                            // If it was successful, the user is taken to the application's home Activity
+                            } else {
+                                // A message is shown to the user
+                                Toast.makeText(MainActivity.this, "Authentication successful! \n Welcome to CrimeStalker!", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
-    private void firebaseTest() {
-        DatabaseReference firedbCrimes = FirebaseDatabase.getInstance().getReference("crimes");
-        DatabaseReference crimes;
-        crimes = FirebaseDatabase.getInstance().getReference();
-        // Creating a crime
-        Crime crime = new Crime("Another crime", "This is another new crime", 2);
-        crimes.child("crimes").push().setValue(crime);
-
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                for (DataSnapshot crimes : dataSnapshot.getChildren()) {
-                    Crime aCrime = crimes.getValue(Crime.class);
-                    Log.d("My app", "Getting data: " + aCrime.getDescription());
-                }
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-
-        firedbCrimes.addValueEventListener(postListener);
-        FirebaseAuth firebase = FirebaseAuth.getInstance();
-
-
-        firebase.createUserWithEmailAndPassword("k@e.com", "123456").
-                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // user registered successfully
-                            // adding profile here
-                            Toast.makeText(MainActivity.this, "User registered", Toast.LENGTH_LONG);
-                        }
-                    }
-                });
+    /*
+    @Author: Kenny Perroni
+    This method takes care of validating the email and password entered by the user
+     */
+    private boolean isLoginValidated(String email, String password){
+        // Regex expression to validate email addresses
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        // Checking if the email or password parameters are empty
+        if(email.trim().equals("") || password.trim().equals("")){
+            Toast.makeText(this, "Please enter both email and password to login", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Checking if the email entered matches the email regex expression
+        if(!email.matches(emailPattern)){
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Returning true if none of the conditions above were met
+        return true;
     }
 
     private static class MyOnClickListener implements View.OnClickListener {
@@ -141,16 +144,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-
         }
-
-
     }
 
     public void testReadCrime_Clicked(View view) {
         Intent intent = new Intent(this, ReadCrime.class);
         startActivity(intent);
-
     }
 
     private void setUpTwitterButton() {

@@ -8,13 +8,14 @@
 
     <!-- String values for RegisterUserActivity -->
     <string name="registerUserTitle">Registration Form</string>
-    <string name="registerUserFirstName">First Name</string>
-    <string name="registerUserLastName">Last Name</string>
-    <string name="registerUserAddress">Address</string>
-    <string name="registerUserPhoneNumber">Phone Number</string>
-    <string name="registerUserEmail">Email</string>
-    <string name="registerUserPassword">Password</string>
+    <string name="registerUserFirstName">*First Name</string>
+    <string name="registerUserLastName">*Last Name</string>
+    <string name="registerUserAddress">*Address</string>
+    <string name="registerUserPhoneNumber">*Phone Number</string>
+    <string name="registerUserEmail">*Email</string>
+    <string name="registerUserPassword">*Password</string>
     <string name="registerUserAllowPoliceCalls">Allow Police Calls</string>
+    <string name="registerUserMandatoryFields">* Mandatory Fields</string>
     <!-- End of String values for RegisterUserActivity -->
 
     <!-- String values for MainActivity (Login) -->
