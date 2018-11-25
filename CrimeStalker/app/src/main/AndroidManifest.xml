@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -32,11 +33,16 @@
         </activity>
         <activity
             android:name=".Activities.RegisterUserActivity"
-            android:windowSoftInputMode="adjustResize" android:label="@string/app_CreateAccount"></activity>
-        <activity android:name=".Activities.ReportCrimeActivity" android:launchMode="singleTop" android:label="@string/app_ReportCrime"></activity>
-    <activity android:name=".Activities.ReadCrime"></activity>
-        <activity android:name=".Activities.MainActivity"/>
+            android:label="@string/app_CreateAccount"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activities.ReportCrimeActivity"
+            android:label="@string/app_ReportCrime"
+            android:launchMode="singleTop" />
+        <activity android:name=".Activities.ReadCrime" />
+        <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.CommentCrimeActivity" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="2f160620708ff1ba8a44940d7808bec5d334c9b6" />
@@ -44,9 +50,11 @@
         <activity android:name=".Activities.HomeActivity" />
         <activity
             android:name=".Activities.CrimeMapActivity"
-            android:label="@string/title_activity_crime_map"></activity>
-        <activity android:name=".Activities.CrimeHistoryActivity"
-            android:label="Crime History"/>
+            android:label="@string/title_activity_crime_map" />
+        <activity
+            android:name=".Activities.CrimeHistoryActivity"
+            android:label="Crime History" />
+        <activity android:name=".Activities.Call911Activity" />
     </application>
 
 </manifest>
