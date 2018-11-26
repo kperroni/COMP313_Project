@@ -2,6 +2,7 @@ package com.comp313_002.crimestalker.Classes;
 
 public class User {
 
+    // Class variables
     private String userId;
     private String firstName;
     private String lastName;
@@ -11,11 +12,12 @@ public class User {
     private String password;
     private boolean allowPoliceCalls;
 
-    // Default constructor
+    // Default constructor (to-be used by firebase when reading data)
     public User() {
 
     }
 
+    // Constructor to initialize a user
     public User(String firstName, String lastName, String address, String phoneNumber, Boolean allowPoliceCalls) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,10 +26,13 @@ public class User {
         this.allowPoliceCalls = allowPoliceCalls;
     }
 
+    // Constructor to initialize a user with email and password (to-be used by firebase when storing user for auth)
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
+
+    // Getters and setters
 
     public String getUserId() {
         return userId;
