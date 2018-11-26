@@ -66,6 +66,7 @@
                     android:layout_width="@dimen/editTextWidth"
                     android:layout_height="wrap_content"
                     android:hint="@string/registerUserPhoneNumber"
+                    android:maxLength="10"
                     android:inputType="phone" />
             </TableRow>
 
@@ -96,6 +97,14 @@
                     android:layout_width="@dimen/editTextWidth"
                     android:layout_height="wrap_content"
                     android:text="@string/registerUserAllowPoliceCalls" />
+            </TableRow>
+
+            <TableRow android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/registerUserMandatoryFields" />
             </TableRow>
 
             <TableRow android:gravity="center_horizontal">
