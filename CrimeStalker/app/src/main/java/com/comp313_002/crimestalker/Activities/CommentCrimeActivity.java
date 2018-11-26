@@ -45,24 +45,22 @@ public class CommentCrimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_crime);
         context = this;
+        // listen all components
         listViewCrime = (ListView)findViewById(R.id.listComments);
         final TextView title = (TextView) findViewById(R.id.textTitle);
         final TextView desc = (TextView) findViewById(R.id.textDesc);
         final TextView oldComment = (TextView) findViewById(R.id.textOldComments);
-        //oldComment.setVisibility(View.INVISIBLE);
         final Button btnBack = (Button) findViewById(R.id.buttonBack);
         final Button btnSave = (Button) findViewById(R.id.buttonSave);
         final Button btnPost = (Button) findViewById(R.id.buttonPost);
         final EditText comment = (EditText) findViewById(R.id.editText);
-
-        //crimeList = new ArrayList<>();
+        // getting the value key from the previous activity ReadCrime
         key = getIntent().getExtras().getString("key");
         oldComment.setText("No comments yet");
-        // readData();
+        //reading the key-value of firebase specific for the unique key
         myRef2.child(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-        //        crimeList.clear();
 
                 crime = dataSnapshot.getValue(Crime.class);
                 int size = crime.getComments().size();
@@ -83,12 +81,11 @@ public class CommentCrimeActivity extends AppCompatActivity {
                     }
                 }
 
-
                 title.setText(crime.getTitle());
                 desc.setText(crime.getDescription());
-
+                // continue if there are values found in firebase, then in this case the value can be deleted
                 if (value.size()>0){
-                    maxValue = value.size();
+                    maxValue = value.size(); //set the max value
                     oldComment.setText("All Comments: (click to delete)");
                     ArrayAdapter arrayAdapter = new ArrayAdapter(CommentCrimeActivity.this, android.R.layout.simple_list_item_1,value);
                     listViewCrime.setAdapter(arrayAdapter);
@@ -108,30 +105,24 @@ public class CommentCrimeActivity extends AppCompatActivity {
                                         else {
                                             Toast.makeText(CommentCrimeActivity.this, "This comment cannot be deleted, try anoter!", Toast.LENGTH_LONG).show();
                                         }
-
-
                                     }
                                 }
                                 catch (Exception e){
                                     continue;
                                 }
                             }
-
                         }
                     });
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(CommentCrimeActivity.this, ReadCrime.class));
-
             }
         });
 
@@ -141,12 +132,10 @@ public class CommentCrimeActivity extends AppCompatActivity {
                     String internalValue = String.valueOf(getMaxValue());//define the correct value to be include, otherwise it will leave the firebase to create its owns key
                     myRef2.child(key).child("comments").child(internalValue).setValue(comment.getText().toString());
                     comment.setText("");
-
                 }
-
             }
         });
-
+    //send value to Tweet
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +149,7 @@ public class CommentCrimeActivity extends AppCompatActivity {
             }
         });
     }
+    //getting the max value to be used correctly into the listview
     public int getMaxValue (){
         int max = 0;
         for (int i=0 ; i<crime.getComments().size();i++){
@@ -167,18 +157,13 @@ public class CommentCrimeActivity extends AppCompatActivity {
 
                 if (!crime.getComments().get(i).toString().isEmpty()){
                     String internal= String.valueOf(i);
-
                     if (max < i ){
                         max = i;
                     }
                     if (max ==0){
                         max ++;
                     }
-
-
                 }
-
-
             }
             catch (Exception e){
                 continue;
@@ -186,6 +171,5 @@ public class CommentCrimeActivity extends AppCompatActivity {
         }
         return max ;
     }
-
 
 }
