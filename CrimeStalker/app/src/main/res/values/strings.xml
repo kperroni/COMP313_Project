@@ -32,6 +32,7 @@
     <string name="labelType">Type</string>
     <string name="labelComments">Comments</string>
     <string name="ReportButton">Report</string>
+    <string name="ReportPolice">Police</string>
     <!--End of String values for ReportCrimeActivity -->
 
     <!-- String values for HomeActivity drawer menu -->

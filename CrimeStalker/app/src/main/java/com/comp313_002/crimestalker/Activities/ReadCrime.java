@@ -52,23 +52,22 @@ public class ReadCrime extends AppCompatActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
         listViewCrime = (ListView)findViewById(R.id.listViewCrime);
         crimeList = new ArrayList<>();
-
-       // readData();
     }
-
-
+    //it will read all the changes done inside the database firebase
     @Override
     protected void onStart() {
         super.onStart();
+        //it reads crimes/CrimeReports key-value
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 crimeList.clear();
-
+                // loop in each value inside the database
                 for (DataSnapshot crimes: dataSnapshot.getChildren()){
                     crime = crimes.getValue(Crime.class);
                     crime.setKey(crimes.getKey()); //set key to pass as an internal parameter
                     try {
+                        //getting the right location on the globe
                         address = geocoder.getFromLocation(crime.getLatitude(), crime.getLongitude(), 1);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -80,32 +79,26 @@ public class ReadCrime extends AppCompatActivity {
                     crimeList.add(crime);
 
                 }
+                //send the value get from database and pass to the list view
                 CrimeList adapter = new CrimeList(ReadCrime.this,crimeList);
                 listViewCrime.setAdapter(adapter);
-
+                //listen the click on any item from the list view
                 listViewCrime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
-
+                        //getting the right position from the listview and send to CommentCrimeActivity
                         TextView temp = (TextView) v.findViewById(R.id.textViewkey);
-
-                        //Toast.makeText(ReadCrime.this, temp.getText().toString(), Toast.LENGTH_LONG).show();
                         Intent i = new Intent(ReadCrime.this,CommentCrimeActivity.class);
                         i.putExtra("key", temp.getText().toString());
                         startActivity(i);
-
                     }
                 });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
-
-
-
 
 }

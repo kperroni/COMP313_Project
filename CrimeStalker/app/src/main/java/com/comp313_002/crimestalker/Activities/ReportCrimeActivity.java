@@ -1,6 +1,7 @@
 package com.comp313_002.crimestalker.Activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -175,29 +176,73 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
 
         // Get a reference to the database service
         DatabaseReference database = fireDB.getReference("crimes");
+        //handle Report button
+        if (view.getId() == (R.id.btnReportCrime))
+        {
+            if(hasValidInput(txtTitle) && hasValidInput(txtType)){
+                Crime crime = new Crime();
+                crime.setTitle(txtTitle.getText().toString());
+                crime.setUserId(userId);
+                crime.setDescription(txtDescription.getText().toString());
+                crime.setType(txtType.getText().toString());
+                if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
+                    crime.addComments(txtComments.getText().toString());
+                }
+                crime.setLatitude((float)currentLocation.getLatitude());
+                crime.setLongitude((float)currentLocation.getLongitude());
+                crime.setTimeStamp(date);
 
-        if(hasValidInput(txtTitle) && hasValidInput(txtType)){
-            Crime crime = new Crime();
-            crime.setTitle(txtTitle.getText().toString());
-            crime.setUserId(userId);
-            crime.setDescription(txtDescription.getText().toString());
-            crime.setType(txtType.getText().toString());
-            if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
-                crime.addComments(txtComments.getText().toString());
+                Toast.makeText( this.getApplicationContext(),"Crime Reported",Toast.LENGTH_LONG ).show();
+                clearInputFields();
+                database.child("CrimeReports").push().setValue(crime);
+                startActivity( new Intent(ReportCrimeActivity.this,HomeActivity.class));
+
             }
-            crime.setLatitude((float)currentLocation.getLatitude());
-            crime.setLongitude((float)currentLocation.getLongitude());
-            crime.setTimeStamp(date);
+            else{
+                Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
+                txtTitle.setError(txtTitle.getHint() + " is required!");
+                txtType.setError(txtType.getHint() + " is required!");
+            }
+        }
+        //handle the Police button
+        else if (view.getId()== (R.id.btnReportPolice))
+        {
+            if(hasValidInput(txtTitle) && hasValidInput(txtType)){
+                Crime crime = new Crime();
+                crime.setTitle(txtTitle.getText().toString());
+                crime.setUserId(userId);
+                crime.setDescription(txtDescription.getText().toString());
+                crime.setType(txtType.getText().toString());
+                if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
+                    crime.addComments(txtComments.getText().toString());
+                }
+                crime.setLatitude((float)currentLocation.getLatitude());
+                crime.setLongitude((float)currentLocation.getLongitude());
+                crime.setTimeStamp(date);
 
-            Toast.makeText( this.getApplicationContext(),"Crime Reported",Toast.LENGTH_LONG ).show();
-            clearInputFields();
-            database.child("CrimeReports").push().setValue(crime);
+                Toast.makeText( this.getApplicationContext(),"Crime Reported",Toast.LENGTH_LONG ).show();
+                clearInputFields();
+                database.child("CrimeReports").push().setValue(crime);
+                //send data to be used on the email
+                String[] value = new String[5];
+                value [0]= Float.toString((float)(currentLocation.getLatitude()));
+                value [1]= Float.toString((float)(currentLocation.getLongitude()));
+                value [2]= date;
+                value [3] = crime.getComments().toString();
+                value [4] = crime.getType().toString();
+                //now send the the Value array to Call911Activity
+                Intent i = new Intent(ReportCrimeActivity.this,Call911Activity.class);
+                i.putExtra("coordinate",value);
+                startActivity(i);
+
+            }
+            else{
+                Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
+                txtTitle.setError(txtTitle.getHint() + " is required!");
+                txtType.setError(txtType.getHint() + " is required!");
+            }
         }
-        else{
-            Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
-            txtTitle.setError(txtTitle.getHint() + " is required!");
-            txtType.setError(txtType.getHint() + " is required!");
-        }
+
 
     }
     private void clearInputFields()
