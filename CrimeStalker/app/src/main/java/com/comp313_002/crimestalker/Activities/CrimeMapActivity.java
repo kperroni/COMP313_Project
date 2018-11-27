@@ -2,6 +2,7 @@ package com.comp313_002.crimestalker.Activities;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.comp313_002.crimestalker.Classes.Crime;
@@ -20,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -50,7 +53,7 @@ public class CrimeMapActivity extends FragmentActivity implements GoogleMap.OnMa
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     // Variable to create reference to the crimes collection in firebase's database
     private DatabaseReference crimesRef = database.getReference("crimes/CrimeReports");
-
+    private static final String TAG = "CrimeHistoryActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +108,22 @@ public class CrimeMapActivity extends FragmentActivity implements GoogleMap.OnMa
     public void onMapReady(GoogleMap googleMap) {
         // Assignning googleMap parameter to our class variable mMap to manipulate map
         mMap = googleMap;
+
+        //Set map styling
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyle));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
         // Checking if permissions are enabled for ACCESS_FINE_LOCATION permission in the Android manifest file
         // If there are not defined, request them
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -153,7 +172,7 @@ public class CrimeMapActivity extends FragmentActivity implements GoogleMap.OnMa
                         // Instantiating a crime object and casting the crimes snapshot to Crime.class
                         Crime crime = crimes.getValue(Crime.class);
                         // Creating an icon variable to set it to the crime value on the map
-                        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.crime_icon);
+                        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.crime_icon_orange);
                         // Adding the marker with the latitude and longitude values from the crime in the current iteration
                         // Also, adding the icon created above to it
                         mMap.addMarker(new MarkerOptions().position(new LatLng(crime.getLatitude(), crime.getLongitude())).title(crime.getTitle()).icon(icon));

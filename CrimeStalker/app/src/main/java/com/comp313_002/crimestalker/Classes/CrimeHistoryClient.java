@@ -19,17 +19,18 @@ public class CrimeHistoryClient{
     public static CrimeHistoryClient getInstance() {
         return ourInstance;
     }
+    public static RequestParams params;
     private final String BASE_URL = "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/MCI_2014_2017/FeatureServer/0/query?";
-    private CrimeHistoryClient() {
 
+    private CrimeHistoryClient() {
+        params = new RequestParams();
+        params.add("where","1=1");
+        params.add("outFields","occurrenceyear,occurrencemonth,occurrenceday,MCI,Lat,Long");
+        params.add("f","json");
     }
 
     public void getData(JsonHttpResponseHandler handler)
     {
-        RequestParams params = new RequestParams();
-        params.add("where","1=1");
-        params.add("f","json");
-        params.add("outFields","occurrenceyear,MCI,Lat,Long");
         client.get(BASE_URL, params, handler);
     }
 }

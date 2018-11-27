@@ -7,11 +7,11 @@ public class Crime {
     private String userId;
     private String title;
     private String description;
-    private String type;
-    private ArrayList<String> comments = new ArrayList<>();
+    private Type type;
+    private ArrayList<String> comments;
     private float latitude;
     private float longitude;
-    private int witnesses;
+    private ArrayList<String> witnesses;
     private boolean policeReported;
     private String timeStamp;
     private String photoUrl;
@@ -19,20 +19,59 @@ public class Crime {
     private String key;
     private String address;
 
-
+    //Types of Crimes
+    public enum Type {
+        ASSAULT{
+            @Override
+            public String toString() {
+                return "Assault";
+            }
+        },
+        BREAK_AND_ENTER {
+            @Override
+            public String toString() {
+                return "Break and Enter";
+            }
+        },
+        ROBBERY{
+            @Override
+            public String toString() {
+                return "Robbery";
+            }
+        },
+        AUTO_THEFT {
+            @Override
+            public String toString() {
+                return "Auto Theft";
+            }
+        },
+        THEFT_OVER {
+            @Override
+            public String toString() {
+                return "Theft Over";
+            }
+        }
+    }
     // Default constructor
     public Crime() {
-
+        comments = new ArrayList<>();
+        witnesses =new ArrayList<>();
     }
 
     // Constructor
     public Crime(String title, String description, int urgency) {
         this.title = title;
         this.description = description;
+        witnesses =new ArrayList<>();
+        comments = new ArrayList<>();
     }
     public void addComments(String comment)
     {
         comments.add(comment);
+    }
+    public void addWitness(String userID)
+    {
+        witnesses.add(userID);
     }
     public String getUserId() {
         return userId;
@@ -63,11 +102,11 @@ public class Crime {
         this.description = description;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -87,12 +126,11 @@ public class Crime {
         this.longitude = longitude;
     }
 
-    public int getWitnesses() {
+    public ArrayList<String> getWitnesses() {
         return witnesses;
     }
-
-    public void setWitnesses(int witnesses) {
-        this.witnesses = witnesses;
+    public int getNumberOfWitnesses() {
+        return witnesses.size();
     }
 
     public boolean isPoliceReported() {

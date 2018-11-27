@@ -3,6 +3,7 @@ package com.comp313_002.crimestalker.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,8 +11,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -24,6 +29,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,11 +38,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-
 public class ReportCrimeActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private GoogleMap mMap;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private MapView mapView;
@@ -45,6 +53,9 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
     private static final String MAP_BUNDLE_KEY = "MapViewBundleKey";
     private FirebaseDatabase fireDB = FirebaseDatabase.getInstance();
     private String userId;
+    private Marker typeMarker;
+    private Spinner typeSpinner;
+    private static final String TAG = "CrimeHistoryActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +66,9 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
         if (savedInstanceState != null) {
             mapBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY);
         }
+        typeSpinner = findViewById(R.id.typeSpinner);
+        ArrayAdapter<Crime.Type> spinnerAdapter = new ArrayAdapter<Crime.Type>(this, R.layout.spinner_item, Crime.Type.values());
+        typeSpinner.setAdapter(spinnerAdapter);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(mapBundle);
         mapView.getMapAsync(this);
@@ -168,7 +182,6 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
     {
         EditText txtTitle = (EditText) findViewById(R.id.txtTitle);
         EditText txtDescription = (EditText) findViewById(R.id.txtDescription);
-        EditText txtType = (EditText) findViewById(R.id.txtType);
         EditText txtComments = (EditText) findViewById(R.id.txtComments);
 
         Location currentLocation = getCurrentLocation();
@@ -179,12 +192,13 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
         //handle Report button
         if (view.getId() == (R.id.btnReportCrime))
         {
-            if(hasValidInput(txtTitle) && hasValidInput(txtType)){
+            if(hasValidInput(txtTitle)){
                 Crime crime = new Crime();
                 crime.setTitle(txtTitle.getText().toString());
                 crime.setUserId(userId);
+                crime.addWitness(userId);
                 crime.setDescription(txtDescription.getText().toString());
-                crime.setType(txtType.getText().toString());
+                crime.setType(Crime.Type.ASSAULT);
                 if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
                     crime.addComments(txtComments.getText().toString());
                 }
@@ -199,20 +213,20 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
 
             }
             else{
-                Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
+                Toast.makeText( this.getApplicationContext(),"Title is required",Toast.LENGTH_LONG ).show();
                 txtTitle.setError(txtTitle.getHint() + " is required!");
-                txtType.setError(txtType.getHint() + " is required!");
             }
         }
         //handle the Police button
         else if (view.getId()== (R.id.btnReportPolice))
         {
-            if(hasValidInput(txtTitle) && hasValidInput(txtType)){
+            if(hasValidInput(txtTitle)){
                 Crime crime = new Crime();
                 crime.setTitle(txtTitle.getText().toString());
                 crime.setUserId(userId);
+                crime.addWitness(userId);
                 crime.setDescription(txtDescription.getText().toString());
-                crime.setType(txtType.getText().toString());
+                crime.setType((Crime.Type)typeSpinner.getSelectedItem());
                 if(!Strings.isEmptyOrWhitespace(txtComments.getText().toString())){
                     crime.addComments(txtComments.getText().toString());
                 }
@@ -234,32 +248,53 @@ public class ReportCrimeActivity extends AppCompatActivity implements OnMapReady
                 Intent i = new Intent(ReportCrimeActivity.this,Call911Activity.class);
                 i.putExtra("coordinate",value);
                 startActivity(i);
-
             }
             else{
-                Toast.makeText( this.getApplicationContext(),"Title and Type is required",Toast.LENGTH_LONG ).show();
+                Toast.makeText( this.getApplicationContext(),"Title is required",Toast.LENGTH_LONG ).show();
                 txtTitle.setError(txtTitle.getHint() + " is required!");
-                txtType.setError(txtType.getHint() + " is required!");
             }
         }
-
-
     }
     private void clearInputFields()
     {
         ((EditText) findViewById(R.id.txtTitle)).getText().clear();
         ((EditText) findViewById(R.id.txtDescription)).getText().clear();
-        ((EditText) findViewById(R.id.txtType)).getText().clear();
         ((EditText) findViewById(R.id.txtComments)).getText().clear();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyle));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
         Location currentLocation = getCurrentLocation();
-        LatLng coordinates = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+        final LatLng coordinates = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinates).zoom(15).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        googleMap.addMarker(new MarkerOptions().position(coordinates).title("Marker"));
-        googleMap.getUiSettings().setAllGesturesEnabled(false);
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        typeMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(getCurrentLocation().getLatitude(),getCurrentLocation().getLongitude())).title("Your Current Location"));
+        mMap.getUiSettings().setAllGesturesEnabled(false);
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                typeMarker.setTitle(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
+
 }
