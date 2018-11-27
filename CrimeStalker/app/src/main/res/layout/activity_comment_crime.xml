@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Activities.CommentCrimeActivity">
+    tools:context=".Activities.CommentCrimeActivity"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textView4"
@@ -105,20 +106,23 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Back" />
+            android:text="Back"
+            android:backgroundTint="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:text="Save"
+            android:backgroundTint="@color/colorAccent"/>
         <Button
             android:id="@+id/buttonPost"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Post" />
+            android:text="Post"
+            tin/>
     </LinearLayout>
 
     <LinearLayout
