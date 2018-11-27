@@ -59,20 +59,29 @@ public class Crime {
     }
 
     // Constructor
-    public Crime(String title, String description, int urgency) {
+    public Crime(String title, String description) {
         this.title = title;
         this.description = description;
         witnesses =new ArrayList<>();
         comments = new ArrayList<>();
     }
+    /*
+     * Method to add comments to ArrayList
+     * @param comment String value to add to comments
+     * */
     public void addComments(String comment)
     {
         comments.add(comment);
     }
+    /*
+     * Method to add witness/userId to ArrayList to subscribe as a witness
+     * @param userID Id of user to add to be added as a witness
+     * */
     public void addWitness(String userID)
     {
         witnesses.add(userID);
     }
+
     public String getUserId() {
         return userId;
     }
@@ -171,7 +180,6 @@ public class Crime {
 
     public void setKey(String keyfirebase) {
         this.key = keyfirebase;
-
     }
     public String getAddress() {
         return address;

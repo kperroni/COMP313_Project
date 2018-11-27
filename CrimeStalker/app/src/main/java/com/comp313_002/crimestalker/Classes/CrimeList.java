@@ -1,7 +1,6 @@
 package com.comp313_002.crimestalker.Classes;
 
 import android.app.Activity;
-import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.comp313_002.crimestalker.R;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
-import java.util.Locale;
 
 public class CrimeList extends ArrayAdapter<Crime> {
     private Activity context;
