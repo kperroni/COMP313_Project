@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
                                 startActivity(new Intent(HomeActivity.this, CrimeHistoryActivity.class));
                                 break;
                             }
-                            // It is executed when the Report Crime option is clicked
+                            // It is executed when the Read Crime option is clicked
                             case R.id.drawerReadCrime:{
                                 startActivity(new Intent(HomeActivity.this, ReadCrime.class));
                                 break;

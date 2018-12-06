@@ -2,7 +2,7 @@ package com.comp313_002.crimestalker.Classes;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// class that has the table structure from Firebase database
 public class Crime {
     private String userId;
     private String title;

@@ -25,18 +25,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+/*
+ * @author Manoel B. Burgos
+ * It is going to read the data (Report crime saved) from Firebase database and send to a customized list view
+ */
+
 
 public class ReadCrime extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference("crimes/CrimeReports");
-
+    // global variables
     private ListView listViewCrime;
     List<Crime> crimeList;
     String key;
     Geocoder geocoder;
     List<Address> address;
     Crime crime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +56,9 @@ public class ReadCrime extends AppCompatActivity {
 
         }
 
-
+        //get the global position
         geocoder = new Geocoder(this, Locale.getDefault());
+        //List type
         listViewCrime = (ListView) findViewById(R.id.listViewCrime);
         crimeList = new ArrayList<>();
     }
@@ -77,6 +84,7 @@ public class ReadCrime extends AppCompatActivity {
                     } catch (Exception e) {
                         continue;
                     }
+                    //getting the correct address to pass on the list view
                     crime.setAddress(address.get(0).getAddressLine(0));
                     crimeList.add(crime);
 
