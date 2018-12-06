@@ -37,12 +37,25 @@
 
     <!-- String values for HomeActivity drawer menu -->
     <string name="homeDrawerViewMap">Crime Map</string>
+    <string name="homeAboutCrimeStalker">About Crime Stalker...</string>
+    <string name="homeWhyCrimeStalker">Why Crime Stalker?</string>
+    <string name="homeHappyStalking">Happy Stalking!</string>
+    <string name="homeAboutCrimeStalkerDescription">Built from the ground up, this native Android product was developed as a Software Development Project for COMP 313.
+        This application allows you to report, share, and monitor crimes that are happening in your surroundings.
+        The technologies used in this project were Java for the Android development and Google\'s Firebase platform for the back-end operations.\n\n
+    </string>
+    <string name="homeWhyCrimeStalkerDescription">Due to the recent criminal activity registered in Toronto, it is crucial to be informed
+    about the events in your surroundings. Report any criminal activity that you witness, so that the police department can act swiftly.
+    Safety is not only a job for the authorities but for all the people that dwell in our city!</string>
+    <string name="homeWhereDoIStartDescription"></string>
     <!-- End of String values for HomeActivity drawer menu -->
 
     <!-- Misc items -->
     <string name="miscSubmitButton">Submit</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="drawer_description">Select one of the services listed below</string>
     <!--End of Misc items -->
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="share_to">Share report to: </string>

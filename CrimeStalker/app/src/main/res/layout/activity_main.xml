@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/gradient_bg"
     android:gravity="center"
     tools:context=".Activities.MainActivity">
+
+    <TableRow android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_cs_logo" />
+    </TableRow>
 
     <TableRow android:gravity="center_horizontal">
 
@@ -30,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/mainLoginEmail"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText" />
         </android.support.design.widget.TextInputLayout>
     </TableRow>
 
@@ -41,7 +50,8 @@
             android:layout_width="@dimen/editTextWidth"
             android:layout_height="wrap_content"
             android:hint="@string/mainLoginPassword"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/colorText" />
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">
@@ -60,24 +70,35 @@
             android:id="@+id/btnMainLoginRegisterUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorSecondary"
             android:onClick="launchRegisterUser"
             android:text="@string/mainLoginRegisterUser" />
 
     </TableRow>
 
+    <TableRow android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/btnTesReadCrime"
-        android:layout_width="182dp"
-        android:layout_height="wrap_content"
-        android:onClick="testReadCrime_Clicked"
-        android:text="Check Crimes" />
+        <Button
+            android:id="@+id/btnTesReadCrime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorSecondaryDark"
+            android:onClick="testReadCrime_Clicked"
+            android:text="Check Crimes" />
+    </TableRow>
 
-    <com.twitter.sdk.android.core.identity.TwitterLoginButton
-        android:id="@+id/twitter_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:clickable="true" />
+    <TableRow
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/twitter_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:clickable="true" />
+    </TableRow>
+
+
 </TableLayout>

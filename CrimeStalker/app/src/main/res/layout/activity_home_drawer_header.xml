@@ -2,16 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="192dp"
-android:background="?attr/colorPrimaryDark"
+android:background="@color/colorPrimaryDark"
 android:padding="16dp"
 android:theme="@style/ThemeOverlay.AppCompat.Dark"
 android:orientation="vertical"
-android:gravity="bottom">
+android:gravity="center">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/app_name"
-    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        <ImageView
+            android:layout_gravity="start"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:src="@drawable/ic_cs_logo"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_gravity="start"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_gravity="start"
+        android:text="@string/drawer_description"/>
 
 </LinearLayout>
