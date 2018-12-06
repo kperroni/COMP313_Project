@@ -66,6 +66,11 @@ public class HomeActivity extends AppCompatActivity {
                                 startActivity(new Intent(HomeActivity.this, CrimeHistoryActivity.class));
                                 break;
                             }
+                            // It is executed when the Report Crime option is clicked
+                            case R.id.drawerReadCrime:{
+                                startActivity(new Intent(HomeActivity.this, ReadCrime.class));
+                                break;
+                            }
                         }
 
                         // Add code here to update the UI based on the item selected
