@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
@@ -31,7 +38,7 @@ import java.util.List;
 public class CommentCrimeActivity extends AppCompatActivity {
     private FirebaseDatabase database2 = FirebaseDatabase.getInstance();
     private DatabaseReference myRef2 = database2.getReference("crimes/CrimeReports");
-
+    private TwitterAuthClient client;
     private ListView listViewCrime;
     //List<Crime> crimeList;
     String key;
@@ -47,6 +54,7 @@ public class CommentCrimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_crime);
         context = this;
+        client = new TwitterAuthClient();
         // listen all components
         listViewCrime = (ListView) findViewById(R.id.listComments);
         final TextView title = (TextView) findViewById(R.id.textTitle);
@@ -157,7 +165,36 @@ public class CommentCrimeActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+        twitterAuth();
+    }
 
+    private void twitterAuth() {
+        client.authorize(this, new com.twitter.sdk.android.core.Callback<TwitterSession>() {
+
+            @Override
+            public void success(Result<TwitterSession> twitterSessionResult) {
+                TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+                final String userNa = session.getUserName();
+                client.requestEmail(session, new Callback<String>() {
+                    @Override
+                    public void success(Result<String> result) {
+                        Log.d(" userID: ", userNa);
+                        // Do something with the result, which provides the email address
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+                        // Do something on failure
+                        Log.d("userID", "fail");
+                    }
+                });
+            }
+
+            @Override
+            public void failure(TwitterException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     //getting the max value to be used correctly into the listview
