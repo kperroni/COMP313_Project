@@ -13,6 +13,11 @@ import com.comp313_002.crimestalker.R;
 
 import java.util.List;
 
+/*
+ * @author Manoel B. Burgos
+ * Creating a Customize adapter to be used in the list view
+ */
+
 public class CrimeList extends ArrayAdapter<Crime> {
     private Activity context;
     private List<Crime> crimeList;
@@ -23,7 +28,7 @@ public class CrimeList extends ArrayAdapter<Crime> {
         this.context = context;
         this.crimeList = crimeList;
     }
-
+    // taking the view objects from xml to send them to list view
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

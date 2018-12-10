@@ -34,6 +34,11 @@ import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import java.util.ArrayList;
 import java.util.List;
+/*
+ * @author Manoel B. Burgos
+ * It is going to allow the user include comments on the report crime saved and also delete comments created.
+ * It is not allowed to delete the first comment
+ */
 
 public class CommentCrimeActivity extends AppCompatActivity {
     private FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -167,6 +172,10 @@ public class CommentCrimeActivity extends AppCompatActivity {
         });
         twitterAuth();
     }
+/*
+* Author: Geraldo
+* Allow to send and post the comment on Twitter
+* */
 
     private void twitterAuth() {
         client.authorize(this, new com.twitter.sdk.android.core.Callback<TwitterSession>() {
@@ -196,6 +205,7 @@ public class CommentCrimeActivity extends AppCompatActivity {
             }
         });
     }
+    // end
 
     //getting the max value to be used correctly into the listview
     public int getMaxValue() {

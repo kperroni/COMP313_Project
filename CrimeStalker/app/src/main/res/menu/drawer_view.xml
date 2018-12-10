@@ -13,5 +13,9 @@
             android:id="@+id/drawerCrimeHistory"
             android:icon="@drawable/crime_history"
             android:title="@string/homeCrimeHistory" />
+        <item
+            android:id="@+id/drawerReadCrime"
+            android:icon="@drawable/police"
+            android:title="Read Crime" />
     </group>
 </menu>
